@@ -1,0 +1,3 @@
+./setup.sh
+./__pycache__
+./gpt/main.py
