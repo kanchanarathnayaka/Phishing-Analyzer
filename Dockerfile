@@ -15,6 +15,7 @@ COPY . .
 
 # Install Playwright dependencies and browsers
 RUN playwright install
+# install dependency
 RUN playwright install-deps
 
 # ===============================================================================
