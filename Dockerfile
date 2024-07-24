@@ -19,8 +19,8 @@ RUN playwright install && playwright install-deps
 # Create a non-root user and group with a specific UID and GID
 RUN groupadd -g 10001 appuser && useradd -u 10001 -g appuser -s /bin/sh appuser
 
-# Set the appropriate permissions for the /app directory
-RUN chown -R appuser:appuser /app
+# Change ownership of the Playwright cache directory
+RUN chown -R appuser:appuser /home/root/.cache
 
 # Change ownership of the copied files to the non-root user
 RUN chown -R appuser:appuser /app
