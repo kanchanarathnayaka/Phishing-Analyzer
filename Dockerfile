@@ -17,6 +17,8 @@ COPY . .
 # Create a non-root user and group with a specific UID and GID
 RUN groupadd -g 10001 appuser && useradd -u 10001 -g appuser -s /bin/sh appuser
 
+RUN playwright install && playwright install-deps
+
 # Set the appropriate permissions for the /app directory
 RUN chown -R appuser:appuser /app
 
@@ -26,11 +28,6 @@ RUN chown -R appuser:appuser /app
 # Switch to the non-root user
 USER 10001
 # ===============================================================================
-
-# Install Playwright dependencies and browsers
-RUN playwright install
-# install dependency
-RUN playwright install-deps
 
 # Expose the port FastAPI is running on
 EXPOSE 8000
