@@ -13,11 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the container
 COPY . .
 
-# Install Playwright dependencies and browsers
-RUN playwright install
-# install dependency
-RUN playwright install-deps
-
 # ===============================================================================
 # Create a non-root user and group with a specific UID and GID
 RUN groupadd -g 10001 appuser && useradd -u 10001 -g appuser -s /bin/sh appuser
@@ -29,8 +24,13 @@ RUN chown -R appuser:appuser /app
 RUN chown -R appuser:appuser /app
 
 # Switch to the non-root user
-# USER 10001
+USER 10001
 # ===============================================================================
+
+# Install Playwright dependencies and browsers
+RUN playwright install
+# install dependency
+RUN playwright install-deps
 
 # Expose the port FastAPI is running on
 EXPOSE 8000
